@@ -1,3 +1,5 @@
+//datos
+
 class Alumno {
     constructor(nombre, nota){
         this.nombre = nombre
@@ -5,17 +7,20 @@ class Alumno {
     }
 }
 
-let alumnos = []
-const jsonAlmacenados = localStorage.getItem('alumnos')
-if (jsonAlmacenados){
-    alumnos = JSON.parse(jsonAlmacenados)
-}
-
 
 const formDatos = document.querySelector('#datos')
 const inputNombre = document.querySelector('#inputNombre')
 const inputNota = document.querySelector('#inputNota')
 const pAlumnos = document.querySelector('#pAlumnos')
+
+//array y proceso
+
+let alumnos = []
+const jsonAlmacenados = localStorage.getItem('alumnos')
+if (jsonAlmacenados){
+    alumnos = JSON.parse(jsonAlmacenados)
+}
+actualizacion()
 
 formDatos.addEventListener('submit', (evento) => {
     evento.preventDefault()
@@ -25,8 +30,12 @@ formDatos.addEventListener('submit', (evento) => {
     localStorage.setItem('alumnos', JSON.stringify(alumnos))
 
     actualizacion()
+    inputNombre.value = ''
+    inputNota.value = ''
 
 })
+
+//function
 
 function actualizacion(){
     const soloNombres = alumnos.map(u => u.nombre)
